@@ -32,11 +32,27 @@ namespace Calculator
 
         void SendError(Exception exception)
         {
-            StreamWriter sw = new StreamWriter("ErrorLog.txt");
-            sw.WriteLine("==================================================================================");
-            sw.WriteLine(exception.ToString() + "       " + DateTime.Now.ToString());
-            sw.WriteLine("==================================================================================");
-            sw.Close();
+            try
+            {
+                StreamWriter sw = new StreamWriter("C:\\Calculator\\ErrorLog.txt");
+                sw.WriteLine("==================================================================================");
+                sw.WriteLine(exception.ToString() + "       " + DateTime.Now.ToString());
+                sw.WriteLine("==================================================================================");
+                sw.Close();
+            }
+            catch(System.UnauthorizedAccessException)
+            {
+                FileStream fs = File.Create("C:\\Calculator\\ErrorLog.txt");
+                fs.Close();
+                StreamWriter sw = new StreamWriter("C:\\Calculator\\ErrorLog.txt");
+                sw.WriteLine("==================================================================================");
+                sw.WriteLine(exception.ToString() + "       " + DateTime.Now.ToString());
+                sw.WriteLine("==================================================================================");
+                sw.WriteLine("==================================================================================");
+                sw.WriteLine("Neexistující log chyb" + "       " + DateTime.Now.ToString());
+                sw.WriteLine("==================================================================================");
+                sw.Close();
+            }
         }
         public int GenerateID() //Automatický generátor unikátního ID pro SQL databázy
         {
@@ -91,6 +107,8 @@ namespace Calculator
                 double secondOperand = double.Parse(operands[2], CultureInfo.InvariantCulture);
                 char sign = char.Parse(operands[1]);
                 double result;
+                    if (secondOperand == 0 && sign == '/')
+                        return "Not a number";
                 switch (sign)
                 {
                     case '+':
