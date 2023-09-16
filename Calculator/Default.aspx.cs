@@ -42,6 +42,7 @@ namespace Calculator
             }
             catch(System.IO.DirectoryNotFoundException)
             {
+                Directory.CreateDirectory("C:\\Calculator");
                 FileStream fs = File.Create("C:\\Calculator\\ErrorLog.txt");
                 fs.Close();
                 StreamWriter sw = new StreamWriter("C:\\Calculator\\ErrorLog.txt");
