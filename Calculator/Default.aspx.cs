@@ -38,7 +38,7 @@ namespace Calculator
             sw.WriteLine("==================================================================================");
             sw.Close();
         }
-        public int GenerateID()
+        public int GenerateID() //Automatický generátor unikátního ID pro SQL databázy
         {
             SqlCommand cmd = new SqlCommand("SELECT id FROM HistoryTable ORDER BY id", con);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -59,7 +59,7 @@ namespace Calculator
             return newID;
 
         }
-        static string UpdateDisplay(string oldDisplayText, string buttonText)
+        static string UpdateDisplay(string oldDisplayText, string buttonText) //Aktualizace displeje
         {
             if ((oldDisplayText == "0" && buttonText != "+" && buttonText != "-" && buttonText != "*" && buttonText != "/" && buttonText !=".") || oldDisplayText.StartsWith("result:"))
             {
@@ -82,7 +82,7 @@ namespace Calculator
             }
         }
 
-        public string Calculate(string displayText)
+        public string Calculate(string displayText) //Logika kalkulačky
         {
             try
             {
