@@ -108,8 +108,8 @@ namespace Calculator
                 double secondOperand = double.Parse(operands[2], CultureInfo.InvariantCulture);
                 char sign = char.Parse(operands[1]);
                 double result;
-                    if (secondOperand == 0 && sign == '/')
-                        return "Not a number";
+                if (secondOperand == 0 && sign == '/')
+                    return "Not a number";
                 switch (sign)
                 {
                     case '+':
@@ -139,7 +139,13 @@ namespace Calculator
                 }
                 return displayText;
             }
-            catch (System.IndexOutOfRangeException)
+            catch (System.IndexOutOfRangeException )
+            {
+                Exception displayException = new Exception("Equation not complete");
+                SendError(displayException);
+                return displayText;
+            }
+            catch (System.FormatException)
             {
                 Exception displayException = new Exception("Equation not complete");
                 SendError(displayException);
@@ -161,77 +167,78 @@ namespace Calculator
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b1.Text);
 
-            
 
+            bEquals.Enabled = true;
         }
 
         protected void b2_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b2.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b3_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b3.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b4_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b4.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b5_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b5.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b6_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b6.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b7_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b7.Text);
 
-            
+            bEquals.Enabled = true;
         }
 
         protected void b8_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b8.Text);
+            bEquals.Enabled = true;
 
-            
         }
 
         protected void b9_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b9.Text);
+            bEquals.Enabled = true;
 
-            
         }
 
         protected void b0_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, b0.Text);
+            bEquals.Enabled = true;
 
-            
         }
 
         protected void bDot_Click(object sender, EventArgs e)
         {
             tB_display.Text = UpdateDisplay(tB_display.Text, bDot.Text);
             bDot.Enabled = false;
+            bEquals.Enabled = true;
         }
 
         protected void bPlus_Click(object sender, EventArgs e)
@@ -243,6 +250,7 @@ namespace Calculator
             bMinus.Enabled = false;
             bMultiply.Enabled = false;
             bDivide.Enabled = false;
+            bEquals.Enabled = false;
         }
 
         protected void bMinus_Click(object sender, EventArgs e)
@@ -254,6 +262,7 @@ namespace Calculator
             bMinus.Enabled = false;
             bMultiply.Enabled = false;
             bDivide.Enabled = false;
+            bEquals.Enabled = false;
         }
 
         protected void bMultiply_Click(object sender, EventArgs e)
@@ -265,6 +274,7 @@ namespace Calculator
             bMinus.Enabled = false;
             bMultiply.Enabled = false;
             bDivide.Enabled = false;
+            bEquals.Enabled = false;
         }
 
         protected void bDivide_Click(object sender, EventArgs e)
@@ -276,6 +286,7 @@ namespace Calculator
             bMinus.Enabled = false;
             bMultiply.Enabled = false;
             bDivide.Enabled = false;
+            bEquals.Enabled = false;
         }
 
         protected void bDelete_Click(object sender, EventArgs e)
@@ -305,6 +316,7 @@ namespace Calculator
         {
             string result = Calculate(tB_display.Text.ToString());
             
+
             con.Open();
             int newID = GenerateID();
             SqlCommand cmd = new SqlCommand("INSERT INTO HistoryTable VALUES('" + newID + "','" + tB_display.Text + " = " + result + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')", con);
