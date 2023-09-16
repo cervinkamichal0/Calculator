@@ -40,7 +40,7 @@ namespace Calculator
                 sw.WriteLine("==================================================================================");
                 sw.Close();
             }
-            catch(System.UnauthorizedAccessException)
+            catch(System.IO.DirectoryNotFoundException)
             {
                 FileStream fs = File.Create("C:\\Calculator\\ErrorLog.txt");
                 fs.Close();
