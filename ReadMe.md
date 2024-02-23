@@ -1,3 +1,5 @@
+Jednoduchá webowá kalkulačka vytvořená pomocí WebForms.
+
 Pro spuštění ve VS možná bude třeba přidat do zdroje balíčků zdroj https://api.nuget.org/v3/index.json.  \
 (Nástroje --> Možnosti --> Správce balíčků NuGet --> zdroje balíčků --> + --> https://api.nuget.org/v3/index.json) 
 
